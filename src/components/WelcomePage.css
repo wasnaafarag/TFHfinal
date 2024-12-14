@@ -1,0 +1,15 @@
+.welcome-container {
+    background-size: cover; /* Ensure the image covers the whole container */
+    background-position: center; /* Center the background image */
+    background-repeat: no-repeat; /* Prevent image repetition */
+    height: 100vh; /* Full viewport height */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white; /* Text color for visibility */
+}
+
+.content {
+    text-align: center;
+}
+
