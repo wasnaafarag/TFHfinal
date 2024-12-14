@@ -3,9 +3,9 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import './Recommendations.css';
 
 function Recommendations() {
+    const [matchedPerfumes, setMatchedPerfumes] = useState([]);
     const location = useLocation();
     const navigate = useNavigate();
-
     // Destructure userPreferences from location.state
     const { userPreferences } = location.state || {}; 
 

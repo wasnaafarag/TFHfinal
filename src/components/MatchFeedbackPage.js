@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
 import './MatchFeedbackPage.css';
 
 function MatchFeedbackPage() {
@@ -48,19 +47,19 @@ function MatchFeedbackPage() {
     ];
 
     // State for feedback
+
     const [feedback, setFeedback] = useState('');
+    const [feedbackSubmitted, setFeedbackSubmitted] = useState(false);
 
-    if (!userPreferences || !recommendedPerfumes) {
-        return <div>No preferences or recommendations available.</div>;
-    }
+    const handleFeedbackChange = (e) => {
+        setFeedback(e.target.value);
+    };
 
-    // Handle the feedback form submission
-    const handleFeedbackSubmit = (e) => {
+    const handleSubmitFeedback = (e) => {
         e.preventDefault();
-        console.log('Feedback submitted:', feedback);
-
-        // Navigate to the "Thank You" page after feedback submission
-        navigate('/thank-you');
+        // Process feedback here (e.g., send to server)
+        console.log(feedback);
+        setFeedbackSubmitted(true);  // Show success message or handle redirection
     };
 
     return (
@@ -71,8 +70,8 @@ function MatchFeedbackPage() {
             <form onSubmit={handleFeedbackSubmit} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', margin: '20px 0' }}>
                 <textarea
                     value={feedback}
-                    onChange={(e) => setFeedback(e.target.value)}
-                    placeholder="Tell us what you think about the recommended perfumes..."
+                    onChange={handleFeedbackChange}
+                    placeholder="Your feedback here..."
                     rows="4"
                     cols="50"
                     required

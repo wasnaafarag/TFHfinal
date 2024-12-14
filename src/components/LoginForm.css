@@ -1,13 +1,10 @@
-/* Global Reset and Basic Styling */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-  
-  body {
-    font-family: 'Arial', sans-serif;
-    background-image: url('/src/Images/background.png'); /* Path to the background image */
+/* Make the body a flex container to center the login form */
+body {
+    display: flex;
+    justify-content: center; /* Horizontally centers the form */
+    align-items: center; /* Vertically centers the form */
+    height: 100vh; /* Full viewport height */
+    background-image: url('/src/Images/background.png'); /* Background image */
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
@@ -25,7 +22,7 @@
     max-width: 400px;
     padding: 30px;
     background-color: rgba(249, 243, 235, 0.9); /* Light beige with slight transparency */
-    border-radius: 10px;
+    border-radius: 40px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     display: flex;
     flex-direction: column;
@@ -38,10 +35,10 @@
     color: #6b4f38; /* Dark brown for the heading */
     font-size: 28px;
     margin-bottom: 20px;
-  }
-  
-  /* Input fields */
-  .login-form input {
+}
+
+/* Input fields */
+.login-form input {
     width: 100%;
     padding: 12px;
     margin: 10px 0;
@@ -49,10 +46,10 @@
     border: 1px solid #6b4f38; /* Dark brown border */
     background-color: #f9f3eb; /* Light beige background for the input */
     font-size: 16px;
-  }
-  
-  /* Submit button */
-  .login-form button {
+}
+
+/* Submit button */
+.login-form button {
     width: 100%;
     padding: 12px;
     background-color: #6b4f38; /* Dark brown background */
@@ -62,17 +59,16 @@
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s;
-  }
-  
-  /* Button hover effect */
-  .login-form button:hover {
+}
+
+/* Button hover effect */
+.login-form button:hover {
     background-color: #8a6b46; /* Lighter brown when hovered */
-  }
-  
-  /* Focus effects for input fields and button */
-  .login-form input:focus,
-  .login-form button:focus {
+}
+
+/* Focus effects for input fields and button */
+.login-form input:focus,
+.login-form button:focus {
     outline: none;
     border-color: #8a6b46; /* Highlight color when focused */
-  }
-  
+}
