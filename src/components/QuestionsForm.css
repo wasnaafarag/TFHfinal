@@ -24,7 +24,7 @@ nav {
     z-index: 1000; /* Ensure the navbar stays on top */
 }
 
-/* Form styling for questions */
+/* Form container styling */
 .questions-form {
     display: flex;
     flex-direction: column;
@@ -58,7 +58,8 @@ nav {
 
 /* Styling for input fields and selects */
 select,
-input[type="number"] {
+input[type="number"],
+textarea {
     padding: 12px;
     margin-top: 5px;
     font-size: 16px;
@@ -69,28 +70,53 @@ input[type="number"] {
     box-sizing: border-box;
 }
 
-/* Styling for radio buttons and checkboxes */
+/* Styling for checkboxes and radio buttons */
 .options {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
+    display: grid; /* Use grid for better control over layout */
+    grid-template-columns: repeat(3, 1fr); /* 3 columns for larger screens */
+    gap: 20px; /* Space between options */
     margin-top: 10px;
 }
 
-/* Each checkbox label with the input */
+/* Each label with the checkbox or radio button */
 .options label {
     display: flex;
+    flex-direction: column;
     align-items: center;
     gap: 10px;
     font-size: 16px;
-    width: calc(33.33% - 10px); /* Ensure each label takes up one-third of the width */
+    width: 100%;
     box-sizing: border-box;
+    text-align: center;
 }
 
 /* Adjust checkbox and radio button styles */
 .options input[type="checkbox"],
 .options input[type="radio"] {
-    margin-right: 10px; /* Add spacing between the checkbox and the label */
+    width: 20px; /* Set checkbox size */
+    height: 20px; /* Match checkbox height to image size */
+}
+
+/* Styling for images */
+.checkbox-image {
+    width: 80px; /* Reduced size of images */
+    height: auto; /* Maintain aspect ratio */
+    border-radius: 8px; /* Rounded corners for the image */
+    object-fit: cover; /* Ensure proper scaling of the image */
+}
+
+/* Styling for the name above each image */
+.options label span {
+    font-size: 14px; /* Smaller font size for the name */
+    color: #6b4f38; /* Dark brown color for the name */
+    width: 100%; /* Ensures name takes the full width */
+}
+
+/* Styling for each perfume item */
+.perfume-item {
+    width: 150px; /* Smaller perfume item width */
+    text-align: center;
+    margin: 10px;
 }
 
 /* Submit button styling */
@@ -122,13 +148,13 @@ button:hover {
 
 /* Responsive adjustments */
 @media (max-width: 768px) {
-    .options label {
-        width: calc(50% - 10px); /* Make labels take half of the container width on medium screens */
+    .options {
+        grid-template-columns: repeat(2, 1fr); /* 2 columns on medium screens */
     }
 }
 
 @media (max-width: 480px) {
-    .options label {
-        width: 100%; /* Full width for labels on small screens */
+    .options {
+        grid-template-columns: 1fr; /* 1 column on small screens */
     }
 }

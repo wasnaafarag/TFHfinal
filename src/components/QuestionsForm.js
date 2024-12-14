@@ -14,12 +14,29 @@ function QuestionsForm() {
     const [errors, setErrors] = useState({});
     const navigate = useNavigate();
 
+    const perfumes = [
+        {
+            name: 'Chanel No. 5',
+            notes: ['Floral', 'Woody'],
+            category: 'Floral',
+        },
+        {
+            name: 'Dior Sauvage',
+            notes: ['Woody', 'Fresh'],
+            category: 'Woody',
+        },
+        {
+            name: 'Gucci Bloom',
+            notes: ['Floral'],
+            category: 'Floral',
+        },
+        // Add more perfumes as needed
+    ];
+
     const handleChange = (e) => {
         const { name, value, checked } = e.target;
 
-        // Check if the field should be treated as an array (checkboxes)
         if (Array.isArray(preferences[name])) {
-            // If checked, add the value to the array, otherwise remove it
             if (checked) {
                 setPreferences((prev) => ({
                     ...prev,
@@ -32,7 +49,6 @@ function QuestionsForm() {
                 }));
             }
         } else {
-            // If it's not an array (like scentVibe, age, season), just set the value
             setPreferences((prev) => ({
                 ...prev,
                 [name]: value,
@@ -44,7 +60,6 @@ function QuestionsForm() {
         e.preventDefault();
         const { favoriteNotes, usualPerfume, scentVibe, scentCategory, age, season } = preferences;
 
-        // Basic validation: Check if any required fields are missing
         const newErrors = {};
         if (favoriteNotes.length === 0) newErrors.favoriteNotes = 'Please select your favorite notes';
         if (usualPerfume.length === 0) newErrors.usualPerfume = 'Please select your usual perfume';
@@ -58,25 +73,20 @@ function QuestionsForm() {
             return; // Stop form submission if there are errors
         }
 
-        const token = localStorage.getItem('token');
+        // Match user preferences to perfumes
+        const matchedPerfumes = perfumes.filter((perfume) => {
+            const notesMatch = favoriteNotes.some((note) => perfume.notes.includes(note));
+            const categoryMatch = scentCategory.includes(perfume.category);
+            const usualPerfumeMatch = usualPerfume.includes(perfume.name);
 
-        try {
-            const response = await fetch('http://localhost:7777/preferences', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    Authorization: `Bearer ${token}`,
-                },
-                body: JSON.stringify(preferences),
-            });
+            return (notesMatch || usualPerfumeMatch) && categoryMatch;
+        });
 
-            if (response.ok) {
-                navigate('/match-feedback'); // Navigate to match-feedback page after successful submission
-            } else {
-                alert('Error saving preferences');
-            }
-        } catch (error) {
-            console.error('Error:', error);
+        if (matchedPerfumes.length > 0) {
+            // Pass matched perfumes to the next page
+            navigate('/match-feedback', { state: { matchedPerfumes } });
+        } else {
+            alert('No match found for your preferences');
         }
     };
 
@@ -93,6 +103,7 @@ function QuestionsForm() {
                         name="favoriteNotes"
                         onChange={handleChange}
                     />
+                    <img src="https://thumbs2.imgbox.com/6a/67/hzgBQufd_t.png" alt="Floral" className="checkbox-image" />
                     Floral
                 </label>
                 <label>
@@ -102,6 +113,7 @@ function QuestionsForm() {
                         name="favoriteNotes"
                         onChange={handleChange}
                     />
+                    <img src="https://thumbs2.imgbox.com/4d/94/s5fYK8wX_t.png" alt="Woody" className="checkbox-image" />
                     Woody
                 </label>
                 <label>
@@ -111,6 +123,7 @@ function QuestionsForm() {
                         name="favoriteNotes"
                         onChange={handleChange}
                     />
+                    <img src="https://thumbs2.imgbox.com/9f/14/rqxHuXZh_t.png" alt="Fresh" className="checkbox-image" />
                     Fresh
                 </label>
                 <label>
@@ -120,6 +133,7 @@ function QuestionsForm() {
                         name="favoriteNotes"
                         onChange={handleChange}
                     />
+                    <img src="https://thumbs2.imgbox.com/d7/82/QOgiryFT_t.png" alt="Oriental" className="checkbox-image" />
                     Oriental
                 </label>
                 {errors.favoriteNotes && <span className="error">{errors.favoriteNotes}</span>}
@@ -134,6 +148,7 @@ function QuestionsForm() {
                         name="usualPerfume"
                         onChange={handleChange}
                     />
+                    <img src="path/to/chanel-image.jpg" alt="Chanel No. 5" className="checkbox-image" />
                     Chanel No. 5
                 </label>
                 <label>
@@ -143,6 +158,7 @@ function QuestionsForm() {
                         name="usualPerfume"
                         onChange={handleChange}
                     />
+                    <img src="path/to/dior-image.jpg" alt="Dior Sauvage" className="checkbox-image" />
                     Dior Sauvage
                 </label>
                 <label>
@@ -152,6 +168,7 @@ function QuestionsForm() {
                         name="usualPerfume"
                         onChange={handleChange}
                     />
+                    <img src="path/to/gucci-image.jpg" alt="Gucci Bloom" className="checkbox-image" />
                     Gucci Bloom
                 </label>
                 {errors.usualPerfume && <span className="error">{errors.usualPerfume}</span>}
@@ -183,6 +200,7 @@ function QuestionsForm() {
                         name="scentCategory"
                         onChange={handleChange}
                     />
+                    <img src="path/to/floral-image.jpg" alt="Floral" className="checkbox-image" />
                     Floral
                 </label>
                 <label>
@@ -192,6 +210,7 @@ function QuestionsForm() {
                         name="scentCategory"
                         onChange={handleChange}
                     />
+                    <img src="path/to/woody-image.jpg" alt="Woody" className="checkbox-image" />
                     Woody
                 </label>
                 <label>
@@ -201,6 +220,7 @@ function QuestionsForm() {
                         name="scentCategory"
                         onChange={handleChange}
                     />
+                    <img src="path/to/fresh-image.jpg" alt="Fresh" className="checkbox-image" />
                     Fresh
                 </label>
                 <label>
@@ -210,6 +230,7 @@ function QuestionsForm() {
                         name="scentCategory"
                         onChange={handleChange}
                     />
+                    <img src="path/to/oriental-image.jpg" alt="Oriental" className="checkbox-image" />
                     Oriental
                 </label>
                 {errors.scentCategory && <span className="error">{errors.scentCategory}</span>}

@@ -9,15 +9,21 @@
     margin: auto; /* Center the container */
     margin-top: 80px; /* Space for the fixed navbar */
     box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centers everything in the container */
+    justify-content: center;
 }
 
 /* Perfume section */
 .perfume {
     display: flex;
-    justify-content: space-around;
+    justify-content: center; /* Center the perfume items horizontally */
     flex-wrap: wrap;
     gap: 20px;
     margin-bottom: 20px;
+    width: 100%; /* Ensure it takes full width */
+    justify-content: center; /* Center items in the row */
 }
 
 /* Perfume item styling */
@@ -37,6 +43,7 @@
 /* Feedback section */
 .feedback {
     margin-top: 20px;
+    width: 100%; /* Ensure feedback section takes full width */
 }
 
 /* Textarea for feedback */
