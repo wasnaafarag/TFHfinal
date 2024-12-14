@@ -1,52 +1,47 @@
-import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';  // Import useNavigate
 import './Recommendations.css';
 
 function Recommendations() {
-    const [recommendations, setRecommendations] = useState([]);
-    const navigate = useNavigate();
+    const location = useLocation();
+    const navigate = useNavigate();  // Initialize the navigate function
 
-    useEffect(() => {
-        const fetchRecommendations = async () => {
-            const token = localStorage.getItem('token');
-            try {
-                const response = await fetch('http://localhost:7777/recommendation', {
-                    headers: {
-                        Authorization: `Bearer ${token}`,
-                    },
-                });
+    const { userPreferences, recommendedPerfumes } = location.state || {};
 
-                if (response.ok) {
-                    const data = await response.json();
-                    setRecommendations(data.recommendedPerfumes);
-                } else {
-                    alert('Error fetching recommendations');
-                }
-            } catch (error) {
-                console.error('Error:', error);
-            }
-        };
-
-        fetchRecommendations();
-    }, []);
+    // Handle navigating back to the QuestionsForm page
+    const handleBackToQuestions = () => {
+        navigate('/questions');  // Navigate back to the questions form
+    };
 
     return (
-        <div className="recommendations-container">
-            <h2>Your Recommendations</h2>
-            <ul>
-                {recommendations.map((perfume) => (
-                    <li key={perfume.ID} className="recommendation-item">
-                        <img src={perfume.image} alt={perfume.name} className="recommendation-image" />
-                        <div className="recommendation-details">
+        <div className="recommendations">
+            <h2>Your Perfume Recommendations</h2>
+            <p>Based on your preferences:</p>
+            <div className="user-preferences">
+                <p><strong>Favorite Notes:</strong> {userPreferences.favoriteNotes.join(', ')}</p>
+                <p><strong>Scent Categories:</strong> {userPreferences.scentCategory.join(', ')}</p>
+                <p><strong>Season:</strong> {userPreferences.season}</p>
+                <p><strong>Age:</strong> {userPreferences.age}</p>
+            </div>
+            <div className="recommendations-list">
+                {recommendedPerfumes.length > 0 ? (
+                    recommendedPerfumes.map((perfume, index) => (
+                        <div className="recommendation-card" key={index}>
+                            <img src={perfume.image} alt={perfume.name} />
                             <h3>{perfume.name}</h3>
                             <p>{perfume.description}</p>
-                            <a href={perfume.link} target="_blank" rel="noopener noreferrer" className="buy-link">
+                            <a href={perfume.purchaseLink} target="_blank" rel="noopener noreferrer">
                                 Buy Now
                             </a>
                         </div>
-                    </li>
-                ))}
-            </ul>
+                    ))
+                ) : (
+                    <p>No recommendations found based on your preferences.</p>
+                )}
+            </div>
+
+            {/* Button to navigate back to the QuestionsForm */}
+            <button onClick={handleBackToQuestions}>Back to Questions</button>
         </div>
     );
 }

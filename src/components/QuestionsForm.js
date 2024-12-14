@@ -5,33 +5,12 @@ import './QuestionsForm.css';
 function QuestionsForm() {
     const [preferences, setPreferences] = useState({
         favoriteNotes: [],
-        usualPerfume: [],
-        scentVibe: '',
         scentCategory: [],
-        age: '',
         season: '',
+        age: '',
     });
     const [errors, setErrors] = useState({});
     const navigate = useNavigate();
-
-    const perfumes = [
-        {
-            name: 'Chanel No. 5',
-            notes: ['Floral', 'Woody'],
-            category: 'Floral',
-        },
-        {
-            name: 'Dior Sauvage',
-            notes: ['Woody', 'Fresh'],
-            category: 'Woody',
-        },
-        {
-            name: 'Gucci Bloom',
-            notes: ['Floral'],
-            category: 'Floral',
-        },
-        // Add more perfumes as needed
-    ];
 
     const handleChange = (e) => {
         const { name, value, checked } = e.target;
@@ -56,38 +35,45 @@ function QuestionsForm() {
         }
     };
 
-    const handleSubmit = async (e) => {
+    const handleSubmit = (e) => {
         e.preventDefault();
-        const { favoriteNotes, usualPerfume, scentVibe, scentCategory, age, season } = preferences;
+        const { favoriteNotes, scentCategory, season, age } = preferences;
 
         const newErrors = {};
         if (favoriteNotes.length === 0) newErrors.favoriteNotes = 'Please select your favorite notes';
-        if (usualPerfume.length === 0) newErrors.usualPerfume = 'Please select your usual perfume';
-        if (!scentVibe) newErrors.scentVibe = 'Please choose a scent vibe';
         if (scentCategory.length === 0) newErrors.scentCategory = 'Please select scent categories';
-        if (!age || isNaN(age) || age < 18) newErrors.age = 'Please enter a valid age (18 or older)';
         if (!season) newErrors.season = 'Please choose your season preference';
+        if (!age || isNaN(age) || age < 18) newErrors.age = 'Please enter a valid age (18 or older)';
 
         if (Object.keys(newErrors).length > 0) {
             setErrors(newErrors);
-            return; // Stop form submission if there are errors
+            return;
         }
 
-        // Match user preferences to perfumes
-        const matchedPerfumes = perfumes.filter((perfume) => {
-            const notesMatch = favoriteNotes.some((note) => perfume.notes.includes(note));
-            const categoryMatch = scentCategory.includes(perfume.category);
-            const usualPerfumeMatch = usualPerfume.includes(perfume.name);
+        // Generate recommendations based on user preferences
+        const recommendations = getRecommendations(favoriteNotes, scentCategory);
 
-            return (notesMatch || usualPerfumeMatch) && categoryMatch;
+        // Pass both preferences and recommendations to the Recommendations page
+        navigate('/recommendations', {
+            state: { userPreferences: preferences, recommendedPerfumes: recommendations }
         });
+    };
 
-        if (matchedPerfumes.length > 0) {
-            // Pass matched perfumes to the next page
-            navigate('/match-feedback', { state: { matchedPerfumes } });
-        } else {
-            alert('No match found for your preferences');
-        }
+    const getRecommendations = (favoriteNotes, scentCategory) => {
+        const allPerfumes = [
+            { name: "Gucci Flora", brand: "Gucci", description: "A light floral scent.", notes: ["Floral"], categories: ["Elegant", "Luxury"], image: 'https://thumbs2.imgbox.com/85/94/9ZJEBzv0_t.png', purchaseLink: 'https://www.gucci.com/us/en/st/capsule/gucci-flora-gorgeous-gardenia' },
+            { name: "Myrrhe Mystère Eau de Parfum", brand: "Tom Ford", description: "A deep woody fragrance.", notes: ["Woody"], categories: ["Casual", "Luxury"], image: 'https://thumbs2.imgbox.com/83/c7/FAG5tjrX_t.png', purchaseLink: 'https://www.perfumesclub.us/en/dolce-gabbana/light-blue-eau-de-toilette-spray' },
+            { name: "Cassili", brand: "BParfums de Marly", description: "A refreshing, clean scent.", notes: ["Fresh"], categories: ["Casual", "Sexy"], image: 'https://thumbs2.imgbox.com/4a/51/GmQ158C4_t.png', purchaseLink: 'https://so-avant-garde.com/products/cassili-eau-de-parfum' },
+            { name: "Hudson Valley EDP", brand: "Gissah", description: "A warm, spicy fragrance.", notes: ["Oriental"], categories: ["Sexy", "Luxury"], image: 'https://thumbs2.imgbox.com/27/2b/druHZ9SN_t.png', purchaseLink: 'https://smellofarabia.com/products/hudson-valley-edp' },
+            { name: "Replica", brand: "Maison Margiela", description: "A spicy, earthy fragrance for fall.", notes: ["Woody", "Oriental"], categories: ["Sexy", "Luxury"], image: 'https://thumbs2.imgbox.com/c1/30/dpnEts1b_t.png', purchaseLink: 'https://www.sephora.com/product/maison-margiela-replica-autumn-vibes' }
+        ];
+        
+        // Filter perfumes based on favorite notes and scent categories
+        return allPerfumes.filter((perfume) => {
+            const noteMatch = favoriteNotes.some((note) => perfume.notes.includes(note));
+            const categoryMatch = scentCategory.some((category) => perfume.categories.includes(category));
+            return noteMatch && categoryMatch;
+        });
     };
 
     return (
@@ -140,114 +126,48 @@ function QuestionsForm() {
             </div>
 
             <div className="scrollable-question">
-                <p>What is your usual perfume go-to?</p>
-                <label>
-                    <input
-                        type="checkbox"
-                        value="Chanel No. 5"
-                        name="usualPerfume"
-                        onChange={handleChange}
-                    />
-                    <img src="path/to/chanel-image.jpg" alt="Chanel No. 5" className="checkbox-image" />
-                    Chanel No. 5
-                </label>
-                <label>
-                    <input
-                        type="checkbox"
-                        value="Dior Sauvage"
-                        name="usualPerfume"
-                        onChange={handleChange}
-                    />
-                    <img src="path/to/dior-image.jpg" alt="Dior Sauvage" className="checkbox-image" />
-                    Dior Sauvage
-                </label>
-                <label>
-                    <input
-                        type="checkbox"
-                        value="Gucci Bloom"
-                        name="usualPerfume"
-                        onChange={handleChange}
-                    />
-                    <img src="path/to/gucci-image.jpg" alt="Gucci Bloom" className="checkbox-image" />
-                    Gucci Bloom
-                </label>
-                {errors.usualPerfume && <span className="error">{errors.usualPerfume}</span>}
-            </div>
-
-            <div>
-                <label>
-                    <p>Do you want a similar vibe or a change?</p>
-                    <select
-                        name="scentVibe"
-                        value={preferences.scentVibe}
-                        onChange={handleChange}
-                        required
-                    >
-                        <option value="">Select</option>
-                        <option value="Similar">Similar</option>
-                        <option value="Change">Change</option>
-                    </select>
-                    {errors.scentVibe && <span className="error">{errors.scentVibe}</span>}
-                </label>
-            </div>
-
-            <div className="scrollable-question">
                 <p>What is your scent category?</p>
                 <label>
                     <input
                         type="checkbox"
-                        value="Floral"
+                        value="Elegant"
                         name="scentCategory"
                         onChange={handleChange}
                     />
-                    <img src="path/to/floral-image.jpg" alt="Floral" className="checkbox-image" />
-                    Floral
+                    <img src="https://thumbs2.imgbox.com/47/ea/Of8VoeZI_t.png" alt="Elegant" className="checkbox-image" />
+                    Elegant
                 </label>
                 <label>
                     <input
                         type="checkbox"
-                        value="Woody"
+                        value="Sexy"
                         name="scentCategory"
                         onChange={handleChange}
                     />
-                    <img src="path/to/woody-image.jpg" alt="Woody" className="checkbox-image" />
-                    Woody
+                    <img src="https://thumbs2.imgbox.com/5f/ce/x1TVM8mi_t.png" alt="Sexy" className="checkbox-image" />
+                    Sexy
                 </label>
                 <label>
                     <input
                         type="checkbox"
-                        value="Fresh"
+                        value="Luxury"
                         name="scentCategory"
                         onChange={handleChange}
                     />
-                    <img src="path/to/fresh-image.jpg" alt="Fresh" className="checkbox-image" />
-                    Fresh
+                    <img src="https://thumbs2.imgbox.com/11/89/eJWcyBvC_t.png" alt="Luxury" className="checkbox-image" />
+                    Luxury
                 </label>
                 <label>
                     <input
                         type="checkbox"
-                        value="Oriental"
+                        value="Casual"
                         name="scentCategory"
                         onChange={handleChange}
                     />
-                    <img src="path/to/oriental-image.jpg" alt="Oriental" className="checkbox-image" />
-                    Oriental
+                    <img src="https://thumbs2.imgbox.com/29/5f/rEnTcokt_t.png" alt="Casual" className="checkbox-image" />
+                    Casual
                 </label>
                 {errors.scentCategory && <span className="error">{errors.scentCategory}</span>}
-            </div>
-
-            <div>
-                <label>
-                    <p>How old are you?</p>
-                    <input
-                        type="number"
-                        name="age"
-                        value={preferences.age}
-                        onChange={handleChange}
-                        required
-                    />
-                    {errors.age && <span className="error">{errors.age}</span>}
-                </label>
             </div>
 
             <div>
@@ -267,7 +187,21 @@ function QuestionsForm() {
                 </label>
             </div>
 
-            <button type="submit">Submit</button>
+            <div>
+                <label>
+                    <p>What is your age?</p>
+                    <input
+                        type="number"
+                        name="age"
+                        value={preferences.age}
+                        onChange={handleChange}
+                        required
+                    />
+                    {errors.age && <span className="error">{errors.age}</span>}
+                </label>
+            </div>
+
+            <button type="submit">See Recommendations</button>
         </form>
     );
 }

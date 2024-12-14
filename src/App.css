@@ -5,30 +5,133 @@
   box-sizing: border-box;
 }
 
+/* Body styling */
 body {
   font-family: 'Arial', sans-serif;
-  background-color: #f4f4f4;
+  background-color: #f9f3eb; /* Light beige background */
   color: #333;
   line-height: 1.6;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start; /* Align at the top, not center vertically */
+  background-image: url('/src/Images/background.png'); /* Add your background image here */
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  margin: 0;
 }
 
+/* Heading styles */
 h1, h2, h3 {
   font-family: 'Helvetica', sans-serif;
+  color: #6b4f38; /* Dark brown color for headings */
 }
 
+/* Anchor link styling */
 a {
   text-decoration: none;
   color: inherit;
 }
 
+/* Button styling */
 button {
   cursor: pointer;
   border: none;
   outline: none;
+  background-color: #6b4f38; /* Dark brown */
+  color: white;
+  font-size: 18px;
+  padding: 12px 20px;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
 }
 
+/* Button hover effect */
+button:hover {
+  background-color: #8a6b46; /* Lighter brown on hover */
+}
+
+/* Container styling */
 .container {
-  width: 80%;
+  width: 100%;
+  max-width: 1200px; /* Increase the width limit for larger screens */
   margin: 0 auto;
   padding: 20px;
+  box-sizing: border-box;
+}
+
+/* Form container for the match feedback or recommendations */
+.match-feedback-container {
+  width: 100%;
+  max-width: 600px; /* Adjust max-width */
+  padding: 30px;
+  background-color: rgba(249, 243, 235, 0.9); /* Light beige with slight transparency */
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-top: 80px; /* Space from the top */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  box-sizing: border-box;
+}
+
+/* Input and textarea styling */
+input, textarea {
+  width: 100%;
+  padding: 12px;
+  border-radius: 5px;
+  border: 1px solid #6b4f38; /* Dark brown border */
+  background-color: #f9f3eb; /* Light beige background */
+  font-size: 16px;
+  box-sizing: border-box;
+}
+
+textarea {
+  resize: vertical; /* Allow vertical resizing of textarea */
+}
+
+/* Perfume item styling */
+.perfume-item {
+  width: 200px;
+  text-align: center;
+  margin: 10px;
+}
+
+.perfume-item img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
+/* Feedback section */
+.feedback {
+  margin-top: 20px;
+  width: 100%;
+}
+
+/* Responsiveness */
+@media (max-width: 768px) {
+  .container {
+    width: 90%; /* Slightly increase container width on smaller screens */
+  }
+
+  .perfume-item {
+    width: 45%; /* Adjust perfume item width to 45% */
+  }
+
+  .match-feedback-container {
+    width: 90%; /* Make form container width 90% */
+  }
+}
+
+@media (max-width: 480px) {
+  .perfume-item {
+    width: 100%; /* Stack perfume items on top of each other */
+  }
+
+  .match-feedback-container {
+    width: 100%; /* Ensure full width on small screens */
+  }
 }

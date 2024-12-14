@@ -31,16 +31,16 @@ nav {
     gap: 20px;
     padding: 30px;
     width: 100%;
-    max-width: 700px;
     background-color: rgba(249, 243, 235, 0.9); /* Beige with slight transparency */
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     box-sizing: border-box;
     margin-top: 80px; /* Add space for the fixed navbar */
-    margin-left: auto; /* Center horizontally */
-    margin-right: auto; /* Center horizontally */
+    margin-left: 0; /* Take full width */
+    margin-right: 0; /* Take full width */
     justify-content: center;
     align-items: center;
+    padding-bottom: 50px; /* Add some bottom padding */
 }
 
 /* Title styling */
@@ -74,8 +74,9 @@ textarea {
 .options {
     display: grid; /* Use grid for better control over layout */
     grid-template-columns: repeat(3, 1fr); /* 3 columns for larger screens */
-    gap: 20px; /* Space between options */
+    gap: 30px; /* Increased space between options */
     margin-top: 10px;
+    margin-bottom: 30px; /* Add bottom margin for spacing */
 }
 
 /* Each label with the checkbox or radio button */
@@ -88,35 +89,46 @@ textarea {
     width: 100%;
     box-sizing: border-box;
     text-align: center;
+    padding: 10px; /* Added padding for better spacing */
+    transition: transform 0.3s ease;
+}
+
+.options label span {
+    font-size: 60px; /* Larger font size for name */
+    color: #6b4f38; /* Dark brown color for the name */
+    width: 100%;
+    text-align: center; /* Center the name above the image */
+    margin-bottom: 10px; 
+}
+
+/* Add hover effect for better UI */
+.options label:hover {
+    transform: scale(1.05); /* Slight zoom effect on hover */
 }
 
 /* Adjust checkbox and radio button styles */
 .options input[type="checkbox"],
 .options input[type="radio"] {
-    width: 20px; /* Set checkbox size */
-    height: 20px; /* Match checkbox height to image size */
+    width: 25px; /* Increased checkbox size */
+    height: 25px; /* Increased checkbox height */
+    cursor: pointer;
 }
 
-/* Styling for images */
+/* Styling for images in checkboxes */
 .checkbox-image {
-    width: 80px; /* Reduced size of images */
-    height: auto; /* Maintain aspect ratio */
-    border-radius: 8px; /* Rounded corners for the image */
-    object-fit: cover; /* Ensure proper scaling of the image */
-}
-
-/* Styling for the name above each image */
-.options label span {
-    font-size: 14px; /* Smaller font size for the name */
-    color: #6b4f38; /* Dark brown color for the name */
-    width: 100%; /* Ensures name takes the full width */
+    width: 120px; /* Image size */
+    height: 120px;
+    object-fit: cover; /* Ensure the image covers the area without distortion */
+    image-rendering: crisp-edges; /* Makes pixelated images sharper */
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add depth to the image */
 }
 
 /* Styling for each perfume item */
 .perfume-item {
-    width: 150px; /* Smaller perfume item width */
+    width: 40%; /* Smaller perfume item width */
     text-align: center;
-    margin: 10px;
+    margin: 20px;
 }
 
 /* Submit button styling */
@@ -140,7 +152,7 @@ button:hover {
 
 /* Scrollable question box styling */
 .scrollable-question {
-    max-height: 150px;
+    max-height: 40%;
     overflow-y: auto;
     margin-bottom: 20px;
     padding-right: 10px;

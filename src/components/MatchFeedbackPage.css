@@ -1,18 +1,38 @@
+/* Body background image */
+body {
+    background-image: url('/src/Images/background.png'); /* Path to the background image */
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    height: 100vh; /* Ensure the background covers the entire viewport */
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; /* Align at the top, not center vertically */
+}
+
 /* Match feedback container */
 .match-feedback-container {
+    width: 100%;
+    max-width: 400px; /* Match the width of the login form */
+    margin: 80px auto 0 auto; /* Center and space down from the top */
     padding: 30px;
     background-color: rgba(249, 243, 235, 0.9); /* Beige with slight transparency */
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    width: 100%;
-    max-width: 800px; /* Limit width for better organization */
-    margin: auto; /* Center the container */
-    margin-top: 80px; /* Space for the fixed navbar */
-    box-sizing: border-box;
+    position: relative;
+    z-index: 1;
     display: flex;
     flex-direction: column;
-    align-items: center; /* Centers everything in the container */
-    justify-content: center;
+    align-items: center;
+    box-sizing: border-box; /* Ensure padding doesn't overflow */
+}
+
+/* Title */
+.match-feedback-container h2 {
+    color: #6b4f38; /* Dark brown for the heading */
+    font-size: 28px;
+    margin-bottom: 20px;
 }
 
 /* Perfume section */
@@ -54,28 +74,35 @@ textarea {
     border-radius: 5px;
     border: 1px solid #6b4f38; /* Dark brown border */
     background-color: #f9f3eb; /* Light beige background */
-    resize: vertical; /* Allows vertical resizing */
     font-size: 16px;
     box-sizing: border-box;
+    resize: vertical; /* Allows vertical resizing */
 }
 
-/* Button styling */
+/* Submit button */
 button {
-    display: block;
     width: 100%;
     padding: 12px;
     background-color: #6b4f38; /* Dark brown background */
     color: white;
+    font-size: 18px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    font-size: 18px;
+    transition: background-color 0.3s;
     margin-top: 20px;
 }
 
 /* Button hover effect */
 button:hover {
     background-color: #8a6b46; /* Lighter brown when hovered */
+}
+
+/* Focus effects for textarea and button */
+textarea:focus,
+button:focus {
+    outline: none;
+    border-color: #8a6b46; /* Highlight color when focused */
 }
 
 /* Responsive styling for small screens */

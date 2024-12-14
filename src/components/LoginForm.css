@@ -1,28 +1,47 @@
-/* Login form styling */
-.login-form {
+/* Global Reset and Basic Styling */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: 'Arial', sans-serif;
+    background-image: url('/src/Images/background.png'); /* Path to the background image */
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    height: 100vh; /* Ensure the background covers the entire viewport */
+    margin: 0;
+  
+    display: flex;
+    justify-content: center; /* Centers content horizontally */
+    align-items: center; /* Centers content vertically */
+  }
+  
+  /* Login form styling */
+  .login-form {
     width: 100%;
     max-width: 400px;
-    margin: 80px auto 0 auto; /* Added margin-top to move the form down */
     padding: 30px;
     background-color: rgba(249, 243, 235, 0.9); /* Light beige with slight transparency */
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    position: relative;
-    z-index: 1;
     display: flex;
     flex-direction: column;
     align-items: center;
-}
-
-/* Login form title */
-.login-form h2 {
+    z-index: 1;
+  }
+  
+  /* Login form title */
+  .login-form h2 {
     color: #6b4f38; /* Dark brown for the heading */
     font-size: 28px;
     margin-bottom: 20px;
-}
-
-/* Input fields */
-.login-form input {
+  }
+  
+  /* Input fields */
+  .login-form input {
     width: 100%;
     padding: 12px;
     margin: 10px 0;
@@ -30,10 +49,10 @@
     border: 1px solid #6b4f38; /* Dark brown border */
     background-color: #f9f3eb; /* Light beige background for the input */
     font-size: 16px;
-}
-
-/* Submit button */
-.login-form button {
+  }
+  
+  /* Submit button */
+  .login-form button {
     width: 100%;
     padding: 12px;
     background-color: #6b4f38; /* Dark brown background */
@@ -43,26 +62,17 @@
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s;
-}
-
-/* Button hover effect */
-.login-form button:hover {
+  }
+  
+  /* Button hover effect */
+  .login-form button:hover {
     background-color: #8a6b46; /* Lighter brown when hovered */
-}
-
-/* Focus effects for input fields and button */
-.login-form input:focus,
-.login-form button:focus {
+  }
+  
+  /* Focus effects for input fields and button */
+  .login-form input:focus,
+  .login-form button:focus {
     outline: none;
     border-color: #8a6b46; /* Highlight color when focused */
-}
-
-/* Body background image */
-body {
-    background-image: url('/src/Images/background.png'); /* Path to the background image */
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
-    height: 100vh; /* Ensure the background covers the entire viewport */
-    margin: 0;
-}
+  }
+  
