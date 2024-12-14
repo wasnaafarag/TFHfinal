@@ -5,8 +5,10 @@ import WelcomePage from './components/WelcomePage';
 import LoginForm from './components/LoginForm';
 import SignupForm from './components/SignupForm';
 import QuestionsForm from './components/QuestionsForm';
-import MatchFeedbackPage from './components/MatchFeedbackPage'; // Import the MatchFeedbackPage component
+import MatchFeedbackPage from './components/MatchFeedbackPage'; 
+import Recommendations from './components/Recommendations';
 import './App.css';
+
 
 function App() {
     return (
@@ -17,7 +19,8 @@ function App() {
                 <Route path="/login" element={<LoginForm />} />
                 <Route path="/signup" element={<SignupForm />} />
                 <Route path="/questions" element={<QuestionsForm />} />
-                <Route path="/match-feedback" element={<MatchFeedbackPage />} />  {/* Updated route */}
+                <Route path="/recommendations" element={<Recommendations />} />
+                <Route path="/match-feedback" element={<MatchFeedbackPage />} />  
             </Routes>
         </Router>
     );
