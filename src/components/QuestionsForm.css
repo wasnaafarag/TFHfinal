@@ -1,13 +1,13 @@
 /* General body styling */
 body {
     background-color: #f9f3eb; /* Light beige background */
-    font-family: Arial, sans-serif;
+    font-family: Arial, sans-serif; /* Use Arial for the body */
     margin: 0;
     padding: 0;
     height: 100vh; /* Full viewport height */
     display: flex;
-    flex-direction: column; /* Stack the navbar and form vertically */
     justify-content: flex-start; /* Align items from the top */
+    align-items: center; /* Center the content vertically */
 }
 
 /* Navbar styling */
@@ -26,8 +26,7 @@ nav {
 
 /* Form container styling */
 .questions-form {
-    display: flex;
-    flex-direction: column;
+    display: block; /* Use block-level for a more natural flow of elements */
     gap: 20px;
     padding: 30px;
     width: 100%;
@@ -35,12 +34,14 @@ nav {
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     box-sizing: border-box;
-    margin-top: 80px; /* Add space for the fixed navbar */
-    margin-left: 0; /* Take full width */
-    margin-right: 0; /* Take full width */
+    margin-top: 100px; /* Increased space below navbar */
+    margin-left: 20px; /* Add some side margins */
+    margin-right: 20px; /* Add some side margins */
     justify-content: center;
     align-items: center;
     padding-bottom: 50px; /* Add some bottom padding */
+    width: auto; /* Adjust width to content */
+    max-width: 700px; /* Max width to ensure responsiveness */
 }
 
 /* Title styling */
@@ -52,8 +53,13 @@ nav {
 }
 
 /* Question styling */
-.question {
+.scrollable-question {
+    max-height: 300px;
+    overflow-y: auto;
     margin-bottom: 20px;
+    padding-right: 10px;
+    font-size: 18px; /* Increased font size */
+    font-family: Arial, sans-serif; /* Use Arial for scrollable text */
 }
 
 /* Styling for input fields and selects */
@@ -74,7 +80,7 @@ textarea {
 .options {
     display: grid; /* Use grid for better control over layout */
     grid-template-columns: repeat(3, 1fr); /* 3 columns for larger screens */
-    gap: 30px; /* Increased space between options */
+    gap: 20px; /* Increased space between options */
     margin-top: 10px;
     margin-bottom: 30px; /* Add bottom margin for spacing */
 }
@@ -85,33 +91,36 @@ textarea {
     flex-direction: column;
     align-items: center;
     gap: 10px;
-    font-size: 16px;
+    font-size: 18px; /* Larger font size for choices */
     width: 100%;
     box-sizing: border-box;
-    text-align: center;
-    padding: 10px; /* Added padding for better spacing */
+    text-align: center; /* Center text */
+    padding: 10px;
     transition: transform 0.3s ease;
+    position: relative; /* Make the label relative for absolute positioning of the checkbox */
 }
 
+/* Title above the image (Value) */
 .options label span {
-    font-size: 60px; /* Larger font size for name */
+    font-size: 20px; /* Adjusted font size */
     color: #6b4f38; /* Dark brown color for the name */
-    width: 100%;
-    text-align: center; /* Center the name above the image */
-    margin-bottom: 10px; 
+    margin-bottom: 10px;
+    font-weight: bold; /* Make the title bold */
+}
+
+/* Checkbox styling to position it in the upper-left corner of the image */
+.options input[type="checkbox"] {
+    position: absolute;
+    top: 5px; /* Adjust the position of the checkbox */
+    left: 5px; /* Adjust the position of the checkbox */
+    width: 25px; /* Increased checkbox size */
+    height: 25px; /* Increased checkbox height */
+    cursor: pointer;
 }
 
 /* Add hover effect for better UI */
 .options label:hover {
     transform: scale(1.05); /* Slight zoom effect on hover */
-}
-
-/* Adjust checkbox and radio button styles */
-.options input[type="checkbox"],
-.options input[type="radio"] {
-    width: 25px; /* Increased checkbox size */
-    height: 25px; /* Increased checkbox height */
-    cursor: pointer;
 }
 
 /* Styling for images in checkboxes */
@@ -122,13 +131,6 @@ textarea {
     image-rendering: crisp-edges; /* Makes pixelated images sharper */
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add depth to the image */
-}
-
-/* Styling for each perfume item */
-.perfume-item {
-    width: 40%; /* Smaller perfume item width */
-    text-align: center;
-    margin: 20px;
 }
 
 /* Submit button styling */
@@ -150,12 +152,10 @@ button:hover {
     background-color: #8a6b46; /* Lighter brown on hover */
 }
 
-/* Scrollable question box styling */
-.scrollable-question {
-    max-height: 40%;
-    overflow-y: auto;
-    margin-bottom: 20px;
-    padding-right: 10px;
+/* Error message styling */
+.error {
+    color: red;
+    font-size: 14px;
 }
 
 /* Responsive adjustments */

@@ -5,8 +5,9 @@ import WelcomePage from './components/WelcomePage';
 import LoginForm from './components/LoginForm';
 import SignupForm from './components/SignupForm';
 import QuestionsForm from './components/QuestionsForm';
-import MatchFeedbackPage from './components/MatchFeedbackPage'; 
+import MatchFeedbackPage from './components/MatchFeedbackPage';
 import Recommendations from './components/Recommendations';
+import Thankyou from './components/Thankyou';
 import './App.css';
 
 
@@ -21,6 +22,7 @@ function App() {
                 <Route path="/questions" element={<QuestionsForm />} />
                 <Route path="/recommendations" element={<Recommendations />} />
                 <Route path="/match-feedback" element={<MatchFeedbackPage />} />  
+                <Route path="/thank-you" element={<Thankyou />} />{/* Updated route */}
             </Routes>
         </Router>
     );
