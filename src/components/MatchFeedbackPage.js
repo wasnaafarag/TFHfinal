@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom'; // Import hooks from react-router-dom
 import './MatchFeedbackPage.css';
 
 function MatchFeedbackPage() {
@@ -47,7 +48,6 @@ function MatchFeedbackPage() {
     ];
 
     // State for feedback
-
     const [feedback, setFeedback] = useState('');
     const [feedbackSubmitted, setFeedbackSubmitted] = useState(false);
 
@@ -55,11 +55,12 @@ function MatchFeedbackPage() {
         setFeedback(e.target.value);
     };
 
-    const handleSubmitFeedback = (e) => {
+    // Correct function name to match the form's `onSubmit`
+    const handleFeedbackSubmit = (e) => {
         e.preventDefault();
         // Process feedback here (e.g., send to server)
-        console.log(feedback);
-        setFeedbackSubmitted(true);  // Show success message or handle redirection
+        console.log('Feedback submitted:', feedback);
+        setFeedbackSubmitted(true); // Show success message or handle redirection
     };
 
     return (
@@ -81,6 +82,13 @@ function MatchFeedbackPage() {
                     Submit Feedback
                 </button>
             </form>
+
+            {/* Success Message */}
+            {feedbackSubmitted && (
+                <div style={{ textAlign: 'center', marginTop: '20px', color: '#28a745', fontWeight: 'bold' }}>
+                    Thank you for your feedback!
+                </div>
+            )}
 
             {/* Future Perfume Recommendations */}
             <h3>Perfume Recommendations for Future Purchases</h3>
